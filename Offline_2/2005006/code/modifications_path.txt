@@ -1,0 +1,12 @@
+# Modifications in manet-routing-compare file
+scratch/manet-routinng-compare-aodv.cc  // for aodv testing
+scratch/manet-routing-compare-raodv.cc  // for raodv testing
+
+# The contents of the src/aodv directory have been copied to the newly created 
+# src/raodv directory. And all the references to aodv have been renamed to raodv
+
+#Modifications other than renaming in src/raodv directory
+
+src/raodv/model/raodv-routing-protocol.h
+src/raodv/model/raodv-routing-protocol.cc
+
