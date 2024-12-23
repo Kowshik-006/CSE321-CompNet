@@ -9,45 +9,49 @@ to 0.8.
 I made the values set to these variables dynamic.
 The function below does the job.
 
-void
-TcpBicTweaked::ChangeBeta_BinCoeff()
-{
-    Time currentTime = Simulator::Now();
-    uint32_t timeToGetCongested = currentTime.GetMilliSeconds() - m_epochStart.GetMilliSeconds();
 
-    if(m_epochStart == Time::Min()){
-        m_beta = 0.6;
-        m_b = 3;
+
+    
+    
+    void
+    TcpBicTweaked::ChangeBeta_BinCoeff()
+    {
+        Time currentTime = Simulator::Now();
+        uint32_t timeToGetCongested = currentTime.GetMilliSeconds() - m_epochStart.GetMilliSeconds();
+
+        if(m_epochStart == Time::Min()){
+            m_beta = 0.6;
+            m_b = 3;
+        }
+        else if(timeToGetCongested > 4000){
+            m_beta = 0.9;
+            m_b = 6;
+        }
+        else if(timeToGetCongested > 3500){
+            m_beta = 0.88;
+            m_b = 6;
+        }
+        else if(timeToGetCongested > 3000){
+            m_beta = 0.86;
+            m_b = 5;
+        }
+        else if(timeToGetCongested > 2500){
+            m_beta = 0.84;
+            m_b = 5;
+        }
+        else if(timeToGetCongested > 2000){
+            m_beta = 0.82;
+            m_b = 4;
+        }
+        else if(timeToGetCongested > 1500){
+            m_beta = 0.8;
+            m_b = 4;
+        }
+        else{
+            m_beta = 0.8;
+            m_b = 3.5;
+        }
     }
-    else if(timeToGetCongested > 4000){
-        m_beta = 0.9;
-        m_b = 6;
-    }
-    else if(timeToGetCongested > 3500){
-        m_beta = 0.88;
-        m_b = 6;
-    }
-    else if(timeToGetCongested > 3000){
-        m_beta = 0.86;
-        m_b = 5;
-    }
-    else if(timeToGetCongested > 2500){
-        m_beta = 0.84;
-        m_b = 5;
-    }
-    else if(timeToGetCongested > 2000){
-        m_beta = 0.82;
-        m_b = 4;
-    }
-    else if(timeToGetCongested > 1500){
-        m_beta = 0.8;
-        m_b = 4;
-    }
-    else{
-        m_beta = 0.8;
-        m_b = 3.5;
-    }
-}
 
 Here, I am checking the time at which congestion has occurred. Basically the m_epochstart is initialized after the end of the slow start phase. 
 And that phase only occurs once at the beginning. After that, after each congestion the window size is set to the value of the ssthresh. 
