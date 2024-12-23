@@ -1,4 +1,4 @@
-I have modified the TCP BIC congestion protocol.
+I have modified the TCP BIC congestion control protocol.
 In TCP BIC, in the congestion control phase, a Binary Search Coefficient is used to find the optimal number of acknowledgments required to increase the window size.
 This is represented by the variable m_b in the code.
 In the original code, the value of this variable is statically assigned to 4, and the data type is uint32. I have made the datatype of the variable double, which 
